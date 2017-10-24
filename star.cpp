@@ -12,6 +12,8 @@ Star::Star(GLfloat radius,GLfloat distance,
 	this->speed = speed;
 	this->selfSpeed = selfSpeed;
 	this->parentStar = parent;
+	this->alphaSelf = 360/selfSpeed;
+	this->alpha = 360/speed;
 
 }
 
@@ -34,12 +36,12 @@ void Star::drawStar(){
 			//x轴方向上平移 distance,y,z方向不变
 			glTranslatef(parentStar->distance,0.0,0.0);
 		}
-		
+
 		//绘制运行轨道
 		glBegin(GL_LINES);
 		for(int i=0;i<n;++i)
 			glVertex2f(distance * cos(2 * PI * i / n),
-				   distance * sin(2 * PI * i / n));
+					distance * sin(2 * PI * i / n));
 		glEnd();
 
 		//绕z轴旋转alpha
@@ -69,10 +71,15 @@ void Star::update(long timeSpan){
 Planet::Planet(GLfloat radius,GLfloat distance,
 		GLfloat speed ,GLfloat selfSpeed,
 		Star* parent,GLfloat rgbColor[3]):
-Star(radius,distance,speed,selfSpeed,parent){
-	//TODO:
-	
-}
+	Star(radius,distance,speed,selfSpeed,parent){
+		//TODO:
+		rgbaColor[0] = rgbColor[0];
+		rgbaColor[1] = rgbColor[1];
+		rgbaColor[2] = rgbColor[2];
+
+
+
+	}
 
 void Planet::drawPlanet(){
 	//TODO:
@@ -90,11 +97,14 @@ void Planet::drawPlanet(){
 }
 
 LightPlanet::LightPlanet(GLfloat radius,GLfloat distance,GLfloat speed,
-			GLfloat selfSpeed,Star* parent,GLfloat rgbColor[3]):
-Planet(radius,distance,speed,selfSpeed,parent,rgbColor){
-	//TODO:
+		GLfloat selfSpeed,Star* parent,GLfloat rgbColor[3]):
+	Planet(radius,distance,speed,selfSpeed,parent,rgbColor){
+		//TODO:
+		rgbaColor[0] = rgbColor[0];
+		rgbaColor[1] = rgbColor[1];
+		rgbaColor[2] = rgbColor[2];
 
-}
+	}
 
 void LightPlanet::drawLight(){
 	//TODO:

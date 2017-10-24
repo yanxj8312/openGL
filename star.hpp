@@ -50,7 +50,7 @@ class LightPlanet : public Planet{
 public:
 	LightPlanet(GLfloat Radius,GLfloat Distance,
 			GLfloat Speed,GLfloat SelfSpeed,
-			Star* Parent,GLfloat rgbClolr[]);
+			Star* Parent,GLfloat rgbClolr[3]);
 	//增加对提供光源的恒星绘制光照
 	void drawLight();
 	virtual void draw(){ drawLight(),drawPlanet();drawStar();}

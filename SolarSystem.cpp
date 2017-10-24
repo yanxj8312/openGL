@@ -2,7 +2,48 @@
 #include "SolarSystem.hpp"
 
 #define TIMEPAST 1
+
+//自转速度
 #define SELFROTATE 3
+//公转半径
+#define SUN_RADIUS 48.74
+#define MER_RADIUS 7.32
+#define VEN_RADIUS 18.15
+#define EAR_RADIUS 19.13
+#define MOO_RADIUS 6.15
+#define MAR_RADIUS 10.19
+#define JUP_RADIUS 42.90
+#define SAT_RADIUS 36.16
+#define URA_RADIUS 25.56
+#define NEP_RADIUS 24.74
+
+//距离太阳的距离
+#define MER_DIS 62.06
+#define VEN_DIS 115.56
+#define EAR_DIS 168.00
+#define MOO_DIS 26.01
+#define MAR_DIS 228.00
+#define JUP_DIS 333.40
+#define SAT_DIS 428.10
+#define URA_DIS 848.00
+#define NEP_DIS 989.10
+
+//运动速度
+#define MER_SPEED 87.0
+#define VEN_SPEED 225.0
+#define EAR_SPEED 365.0
+#define MOO_SPEED 30.0
+#define MAR_SPEED 687.0
+#define JUP_SPEED 1298.4
+#define SAT_SPEED 3225.6
+#define URA_SPEED 3066.4
+#define NEP_SPEED 6014.8
+
+//为了方便操作数组，定义一个设置多为数组的宏
+#define SET_VALUE_3(name,value0,value1,value2) \
+			((name)[0])=(value0),((name)[1])=(value1),((name)[2]=(value2))
+
+
 
 enum STARS{
 	Sun,
@@ -70,6 +111,12 @@ SolarSystem::SolarSystem(){
 	centerX = centerY = centerZ = 0;
 	upX = upY = 0;
 	upZ = 1;
+	
+	//太阳
+	GLfloat rgbColor[3] = {1,0,0};
+	stars[Sun] = new LightPlanet(SUN_RADIUS,0,0,SELFROTATE,0,rgbColor);
+	//水星
+	
 }
 
 
