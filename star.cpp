@@ -12,8 +12,14 @@ Star::Star(GLfloat radius,GLfloat distance,
 	this->speed = speed;
 	this->selfSpeed = selfSpeed;
 	this->parentStar = parent;
-	this->alphaSelf = 360/selfSpeed;
-	this->alpha = 360/speed;
+	this->alphaSelf = this->alpha = 0;
+	for(int i=0;i<4;i++)
+		this->rgbaColor[i] = 1.0f;
+
+	if(speed >0)
+		this->speed = 360.0f / speed;
+	else
+		this->speed = 0.0f;
 
 }
 
@@ -47,14 +53,14 @@ void Star::drawStar(){
 		//绕z轴旋转alpha
 		glRotatef(alpha ,0,0,1);
 		//x轴方向平移distance，y，z方向不变
-		glTranslatef(discance,0.0,0.0);
+		glTranslatef(distance,0.0,0.0);
 
 		//自转
-		glRotantef(alphaSelf,0,0,1);
+		glRotatef(alphaSelf,0,0,1);
 
 		//绘制行星颜色
 		glColor3f(rgbaColor[0],rgbaColor[1],rgbaColor[2]);
-		glutSolidSpenere(radius,40,32);
+		glutSolidSphere(radius,40,32);
 	}
 	//恢复绘制前的矩阵环境
 	glPopMatrix();
@@ -76,7 +82,7 @@ Planet::Planet(GLfloat radius,GLfloat distance,
 		rgbaColor[0] = rgbColor[0];
 		rgbaColor[1] = rgbColor[1];
 		rgbaColor[2] = rgbColor[2];
-
+		rgbaColor[3] = 1.0f;
 
 
 	}
@@ -93,16 +99,13 @@ void Planet::drawPlanet(){
 	glMaterialfv(GL_FRONT,GL_DIFFUSE,mat_diffuse);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,mat_specular);
 	glMaterialfv(GL_FRONT,GL_EMISSION,mat_emission);
-	glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
+	glMaterialf(GL_FRONT,GL_SHININESS,mat_shininess);
 }
 
 LightPlanet::LightPlanet(GLfloat radius,GLfloat distance,GLfloat speed,
 		GLfloat selfSpeed,Star* parent,GLfloat rgbColor[3]):
 	Planet(radius,distance,speed,selfSpeed,parent,rgbColor){
 		//TODO:
-		rgbaColor[0] = rgbColor[0];
-		rgbaColor[1] = rgbColor[1];
-		rgbaColor[2] = rgbColor[2];
 
 	}
 
